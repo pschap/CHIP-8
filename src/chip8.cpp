@@ -84,5 +84,66 @@ namespace CHIP8
 	}
 	#pragma endregion
 
+	void Chip8Processor::opcode_0NNN()
+	{
 
+	}
+
+	void Chip8Processor::opcode_00E0()
+	{
+		memset(video, 0, sizeof(video));
+	}
+
+	void Chip8Processor::opcode_00EE()
+	{
+		sp--;
+		pc = stack[sp];
+	}
+
+	void Chip8Processor::opcode_1NNN()
+	{
+		pc = opcode & 0x0FFFU;
+	}
+
+	void Chip8Processor::opcode_2NNN()
+	{
+		stack[sp] = pc;
+		sp++;
+		pc = opcode & 0x0FFFU;
+	}
+
+	void Chip8Processor::opcode_3XNN()
+	{
+		uint8_t x = (opcode & 0x0F00U) >> 8U;
+		uint8_t nn = opcode & 0x00FFU;
+
+		if (V[x] == nn)
+			pc += 2;
+	}
+
+	void Chip8Processor::opcode_4XNN()
+	{
+		uint8_t x = (opcode & 0x0F00U) >> 8U;
+		uint8_t nn = opcode & 0x00FFU;
+
+		if (V[x] != nn)
+			pc += 2;
+	}
+
+	void Chip8Processor::opcode_5XY0()
+	{
+		uint8_t x = (opcode & 0x0F00U) >> 8U;
+		uint8_t y = (opcode & 0x00F0U) >> 4U;
+
+		if (V[x] == V[y])
+			pc += 2;
+	}
+
+	void Chip8Processor::opcode_6XNN()
+	{
+		uint8_t x = (opcode & 0xF00U) >> 8U;
+		uint8_t nn = opcode & 0x00FFU;
+
+		V[x] = nn;
+	}
 }

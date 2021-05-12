@@ -64,6 +64,7 @@ namespace CHIP8
 			 * Functions to execute each of the 35 Chip-8 opcodes. List of opcodes can be
 			 * found here: https://en.wikipedia.org/wiki/CHIP-8
 			 */
+			#pragma region opcodes
 			void opcode_0NNN();
 			void opcode_00E0();
 			void opcode_00EE();
@@ -99,6 +100,7 @@ namespace CHIP8
 			void opcode_FX33();
 			void opcode_FX55();
 			void opcode_FX65();
+			#pragma endregion
 
 		public:
 			/* Constructor initializes memory */

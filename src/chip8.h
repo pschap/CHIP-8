@@ -64,8 +64,9 @@ namespace CHIP8
 			 * Functions to execute each of the 35 Chip-8 opcodes. List of opcodes can be
 			 * found here: https://en.wikipedia.org/wiki/CHIP-8
 			 */
+
 			#pragma region opcodes
-			void opcode_0NNN();
+			void opcode_NULL();
 			void opcode_00E0();
 			void opcode_00EE();
 			void opcode_1NNN();
@@ -101,6 +102,19 @@ namespace CHIP8
 			void opcode_FX55();
 			void opcode_FX65();
 			#pragma endregion
+
+			typedef void (Chip8Processor::*Opcode)();
+			
+			void Table0();
+			void Table8();
+			void TableE();
+			void TableF();
+
+			Opcode table[0xF + 1];
+			Opcode table0[0xE + 1];
+			Opcode table8[0xE + 1];
+			Opcode tableE[0xE + 1];
+			Opcode tableF[0x65 + 1];
 
 		public:
 			/* Constructor initializes memory */

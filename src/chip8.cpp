@@ -36,7 +36,7 @@ namespace CHIP8
 		for (i = 0; i < 0xF + 1; i++)
 			table[i] = &Chip8Processor::opcode_NULL;
 
-		for (i = 0; i < 0xE + 1)
+		for (i = 0; i < 0xE + 1; i++)
 		{
 			table0[i] = &Chip8Processor::opcode_NULL;
 			table8[i] = &Chip8Processor::opcode_NULL;
@@ -537,6 +537,21 @@ namespace CHIP8
 	void Chip8Processor::Table0()
 	{
 		((*this).*(table0[opcode & 0x000FU]))();
+	}
+
+	void Chip8Processor::Table8()
+	{
+		((*this).*(table8[opcode & 0x000FU]))();
+	}
+
+	void Chip8Processor::TableE()
+	{
+		((*this).*(tableE[opcode & 0x000FU]))();
+	}
+
+	void Chip8Processor::TableF()
+	{
+		((*this).*(table0[opcode & 0x00FFU]))();
 	}
 
 	#pragma endregion

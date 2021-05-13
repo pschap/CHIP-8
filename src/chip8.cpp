@@ -170,6 +170,12 @@ namespace CHIP8
 
 	#pragma region opcodes
 
+	/* Null opcode */
+	void Chip8Processor::opcode_NULL()
+	{
+
+	}
+
 	/* Clears the screen. */
 	void Chip8Processor::opcode_00E0()
 	{

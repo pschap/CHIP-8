@@ -145,6 +145,29 @@ namespace CHIP8
 
 	#pragma endregion
 
+	#pragma region Cycle
+
+	void Chip8Processor::Cycle()
+	{
+		/* Fetch the next opcode. Since the opcode is two bytes long, the first byte is stored in memory[pc] and the second in memory[pc + 1] */
+		opcode = (memory[pc] << 8U) | memory[pc + 1];
+
+		/* Increment the program counter to move onto the next instruction */
+		pc += 2;
+
+		/* Decode and execute the opcode */
+		((*this).*(table[(opcode & 0xF000U) >> 12U]))();
+
+		/* Decrement the delay timer and the sound timer if necessary */
+		if (delay_timer > 0)
+			delay_timer--;
+
+		if (sound_timer > 0)
+			sound_timer--;
+	}
+
+	#pragma endregion
+
 	#pragma region opcodes
 
 	/* Clears the screen. */

@@ -128,6 +128,9 @@ namespace CHIP8
 
 			/* Emulate one Chip-8 "Cycle" */
 			void Cycle();
+
+			uint32_t* GetDisplayState();
+			uint8_t* GetKeypadState();
 	};
 }
 

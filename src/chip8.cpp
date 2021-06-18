@@ -551,7 +551,21 @@ namespace CHIP8
 
 	void Chip8Processor::TableF()
 	{
-		((*this).*(table0[opcode & 0x00FFU]))();
+		((*this).*(tableF[opcode & 0x00FFU]))();
+	}
+
+	#pragma endregion
+
+	#pragma region States
+
+	uint32_t* Chip8Processor::GetDisplayState()
+	{
+		return video;
+	}
+
+	uint8_t* Chip8Processor::GetKeypadState()
+	{
+		return keypad;
 	}
 
 	#pragma endregion
